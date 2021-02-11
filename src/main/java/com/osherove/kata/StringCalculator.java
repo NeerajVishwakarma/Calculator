@@ -22,12 +22,21 @@ public class StringCalculator {
 			String[] numbersInString = input.split("[\n" + defaultDelimeter + "]");
 			long[] numberInInt = new long[numbersInString.length];
 			int counter = 0;
+			
 			for (String s : numbersInString)
 				if (!s.isEmpty())
 					numberInInt[counter++] = Integer.parseInt(s);
 			counter = 0;
-			for (long i : numberInInt)
+			try {
+			for (long i : numberInInt) {
+				if(i<0)
+					throw new Exception(Long.toString(i));
 				result += i;
+			}
+			}
+			catch(Exception e) {
+				System.out.println("Negatives not allowed - "+e.getMessage());
+			}
 		}
 		return result;
 	}

@@ -54,9 +54,18 @@ public class StringCalculatorTest {
 
 	// 4. Support different delimiters
 	@Test
-	public void supportDiffDelimiterbtwNumberAndCalculate() { 
+	public void supportDiffDelimiterbtwNumberAndCalculate() {
 		assertTrue("Validation of addtion of two numbers", (calculator.add("//;\n2\n34;3\n75") == 114));
 		assertTrue("Validation of addtion of two numbers",
 				(calculator.add("//?\n1?6\n7324238?193222?8\n342543") == 7860018));
+	}
+
+	// 5. Calling Add with a negative number will throw an exception “negatives not
+	// allowed” -
+	// and the negative that was passed.
+	@Test(expected = Exception.class)
+	public void negativeNumberthrowExceptionAndCalculate() {
+		calculator.add("//;\n-2\n34;3\n75");
+		calculator.add("//?\n1?6\n7324238?-193222?8\n342543");
 	}
 }
