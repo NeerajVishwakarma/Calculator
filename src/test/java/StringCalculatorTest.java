@@ -33,4 +33,13 @@ public class StringCalculatorTest {
 		assertTrue("Validation of addtion of two numbers", (calculator.add("8,9") == 17));
 		assertTrue("Validation of addtion of two numbers", (calculator.add("78,19") == 97));
 	}
+	
+	//2. Allow the Add method to handle an unknown amount of numbers
+	@Test
+	public void takeUnknownInputAndCalculate() {
+		assertTrue("Empty String Validation", (calculator.add("") == 0.000));
+		assertTrue("Validation of addtion of one numbers", (calculator.add("102123121") == 102123121));
+		assertTrue("Validation of addtion of two numbers", (calculator.add("2,34459") == 34461));
+		assertTrue("Validation of addtion of two numbers", (calculator.add("7324238,193222") == 7517460));
+	}
 }
