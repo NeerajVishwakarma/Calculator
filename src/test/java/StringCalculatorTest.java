@@ -26,6 +26,6 @@ public class StringCalculatorTest {
 			“” == 0 , “1” == 1 , “1,2” == 3*/
 	@Test
 	public void takeSimpleInputAndCalculate() {
-		
+		assert
 	}
 }
