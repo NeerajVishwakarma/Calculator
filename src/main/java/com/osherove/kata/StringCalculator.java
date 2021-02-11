@@ -14,7 +14,7 @@ public class StringCalculator {
 		if (input.isEmpty())
 			return 0;
 		else {
-			String[] numbersInString = input.split(",");
+			String[] numbersInString = input.split("[\n,]");
 			long[] numberInInt = new long[numbersInString.length];
 			int counter = 0;
 			for (String s : numbersInString)

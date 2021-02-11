@@ -33,13 +33,21 @@ public class StringCalculatorTest {
 		assertTrue("Validation of addtion of two numbers", (calculator.add("8,9") == 17));
 		assertTrue("Validation of addtion of two numbers", (calculator.add("78,19") == 97));
 	}
-	
-	//2. Allow the Add method to handle an unknown amount of numbers
+
+	// 2. Allow the Add method to handle an unknown amount of numbers
 	@Test
 	public void takeUnknownInputAndCalculate() {
 		assertTrue("Empty String Validation", (calculator.add("") == 0.000));
 		assertTrue("Validation of addtion of one numbers", (calculator.add("102123121") == 102123121));
 		assertTrue("Validation of addtion of two numbers", (calculator.add("2,34459") == 34461));
 		assertTrue("Validation of addtion of two numbers", (calculator.add("7324238,193222") == 7517460));
+	}
+
+	// 3. Allow the Add method to handle new lines between numbers (instead of
+	// commas).
+	@Test
+	public void takenewLinesbtwNumberAndCalculate() {
+		assertTrue("Validation of addtion of two numbers", (calculator.add("2\n34,3\n75,3,3,2\n3\n4\n8\n101") == 238));
+		assertTrue("Validation of addtion of two numbers", (calculator.add("1\n6\n7324238,193222\n8\n342543") == 7860018));
 	}
 }
