@@ -11,7 +11,10 @@ import java.util.Arrays;
  */
 public class StringCalculator {
 
+	static int invokeCount = 0;
+
 	public long add(String input) {
+		invokeCount++;
 		long result = 0;
 		char defaultDelimeter = ',';
 		if (input.isEmpty())
@@ -38,8 +41,11 @@ public class StringCalculator {
 						negativeNumbers[negativeCounter++] = i;
 						foundNegative = true;
 					}
-					if (!foundNegative)
-						result += i;
+					if (!foundNegative) {
+						if ((i <= 1000) & (i>=0))
+							result += i;
+					}
+
 				}
 				if (foundNegative) {
 					throw new Exception(Arrays.toString(Arrays.copyOfRange(negativeNumbers, 0, negativeCounter)));
@@ -49,6 +55,10 @@ public class StringCalculator {
 			}
 		}
 		return result;
+	}
+
+	public int GetCalledCount() {
+		return StringCalculator.invokeCount;
 	}
 
 }
