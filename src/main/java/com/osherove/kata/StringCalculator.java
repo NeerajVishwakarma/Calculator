@@ -3,6 +3,8 @@
  */
 package com.osherove.kata;
 
+import java.util.Arrays;
+
 /**
  * @author Neeraj Vishwakarma
  *
@@ -22,20 +24,28 @@ public class StringCalculator {
 			String[] numbersInString = input.split("[\n" + defaultDelimeter + "]");
 			long[] numberInInt = new long[numbersInString.length];
 			int counter = 0;
-			
+
 			for (String s : numbersInString)
 				if (!s.isEmpty())
 					numberInInt[counter++] = Integer.parseInt(s);
 			counter = 0;
 			try {
-			for (long i : numberInInt) {
-				if(i<0)
-					throw new Exception(Long.toString(i));
-				result += i;
-			}
-			}
-			catch(Exception e) {
-				System.out.println("Negatives not allowed - "+e.getMessage());
+				long[] negativeNumbers = new long[numberInInt.length];
+				boolean foundNegative = false;
+				int negativeCounter = 0;
+				for (long i : numberInInt) {
+					if (i < 0) {
+						negativeNumbers[negativeCounter++] = i;
+						foundNegative = true;
+					}
+					if (!foundNegative)
+						result += i;
+				}
+				if (foundNegative) {
+					throw new Exception(Arrays.toString(Arrays.copyOfRange(negativeNumbers, 0, negativeCounter)));
+				}
+			} catch (Exception e) {
+				System.out.println("Negatives not allowed - " + e.getMessage());
 			}
 		}
 		return result;

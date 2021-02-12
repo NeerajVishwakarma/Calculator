@@ -63,9 +63,18 @@ public class StringCalculatorTest {
 	// 5. Calling Add with a negative number will throw an exception “negatives not
 	// allowed” -
 	// and the negative that was passed.
-	@Test(expected = Exception.class)
+	@Test
 	public void negativeNumberthrowExceptionAndCalculate() {
+		System.out.println("Output of 5. Add A Negative Number");
 		calculator.add("//;\n-2\n34;3\n75");
 		calculator.add("//?\n1?6\n7324238?-193222?8\n342543");
+	}
+
+	// 6. If there are multiple negatives, show all of them in the exception message
+	@Test
+	public void multiNegativeNumberthrowExceptionAndCalculate() {
+		System.out.println("Output of 6. Add Multiple Negative Numbers");
+		calculator.add("//;\n-2\n-34;3\n-75");
+		calculator.add("//?\n-1?6\n-7324238?-193222?8\n342543");
 	}
 }
