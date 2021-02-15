@@ -39,9 +39,9 @@ public class StringCalculatorTest {
 	@Test
 	public void takeUnknownInputAndCalculate() {
 		assertTrue("Empty String Validation", (calculator.add("") == 0.000));
-		assertTrue("Validation of addtion of one numbers", (calculator.add("102123121") == 102123121));
-		assertTrue("Validation of addtion of two numbers", (calculator.add("2,34459") == 34461));
-		assertTrue("Validation of addtion of two numbers", (calculator.add("7324238,193222") == 7517460));
+		assertTrue("Validation of addtion of one numbers", (calculator.add("102123121") == 0));
+		assertTrue("Validation of addtion of two numbers", (calculator.add("2,34459") == 2));
+		assertTrue("Validation of addtion of two numbers", (calculator.add("7324238,193222") == 0));
 	}
 
 	// 3. Allow the Add method to handle new lines between numbers (instead of
@@ -50,7 +50,7 @@ public class StringCalculatorTest {
 	public void takenewLinesbtwNumberAndCalculate() {
 		assertTrue("Validation of addtion of multiple numbers", (calculator.add("2\n34,3\n75,3,3,2\n3\n4\n8\n101") == 238));
 		assertTrue("Validation of addtion of multiple numbers",
-				(calculator.add("1\n6\n7324238,193222\n8\n342543") == 7860018));
+				(calculator.add("1\n6\n7324238,193222\n8\n342543") == 15));
 	}
 
 	// 4. Support different delimiters
@@ -58,7 +58,7 @@ public class StringCalculatorTest {
 	public void supportDiffDelimiterbtwNumberAndCalculate() {
 		assertTrue("Validation of addtion of multiple numbers", (calculator.add("//;\n2\n34;3\n75") == 114));
 		assertTrue("Validation of addtion of multiple numbers",
-				(calculator.add("//?\n1?6\n7324238?193222?8\n342543") == 7860018));
+				(calculator.add("//?\n1?6\n7324238?193222?8\n342543") == 15));
 	}
 
 	// 5. Calling Add with a negative number will throw an exception “negatives not
@@ -98,4 +98,30 @@ public class StringCalculatorTest {
 		assertEquals("Validation of addtion of multiple numbers and 1000 is ignored", calculator.add("//?\n1?6\n7324238?193222?8\n342543"), 15);
 		assertEquals("Validation of addtion of multiple numbers and 1000 is ignored", calculator.add("//?\n1000?600\n1001?0?8\n342543"), 1608);
 	}
+	
+	// 10. Delimiters can be of any length with the following format:
+	// “//[delimiter]\n”
+	// “//[***]\n1***2***3” == 6
+	@Test
+	public void anylengthDelimitersAndCalculated() {
+		assertEquals("Validation of any length of Delimiters", calculator.add("//[***]\n2***34***3***75"), 114);
+		assertEquals("any length of Delimiters", calculator.add("//[%%]\n1%%6\n732%%42%%38%%193%%222%%8\n342%%543"), 2127);
+		assertEquals("any length of Delimiters", calculator.add("//[,,]\n1000,,600\n1001,,0,,8\n3,,42,,543"), 2196);
+	}
+	
+	// 11. Allow multiple delimiters
+	@Test
+	public void multipleDelimitersAsCharAndCalculated() {
+		assertEquals("Validation of any length of Delimiters", calculator.add("//[*][?][^]\n2*3?4^3?7^5"), 24);
+		assertEquals("any length of Delimiters", calculator.add("//[%][^]\n1^6\n732^42^38%19%32%22^8\n34%25^43"), 1002);
+		assertEquals("any length of Delimiters", calculator.add("//[!][@][#][$]\n100$10!600\n10@01!0$8\n34#25#43"), 831);
+	}
+	
+	// 12. make sure you can also handle multiple delimiters with length longer than one char
+		@Test
+		public void multipleDelimitersAsStringAndCalculated() {
+			assertEquals("Validation of any length of Delimiters", calculator.add("//[***][???][%%%]\n2???3***4%%%3***7???5"), 24);
+			assertEquals("any length of Delimiters", calculator.add("//[&&][@@@]\n1&&6\n73@@@193@@@8\n34&&43"), 358);
+			assertEquals("any length of Delimiters", calculator.add("//[&&][$$][##][!!]\n10!!600\n10$$01##0$$8\n342&&543"), 1514);
+		}
 }
